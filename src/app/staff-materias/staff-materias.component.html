@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row my-5">
+      <div class="col-6 offset-3">
+          <h1 class="text-center">Administrar Materias</h1>
+        </div>
+        <div class="col-3">
+          <a routerLink="/inicio"><button class="btn btn-warning my-1">Volver</button></a>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <select name="opciones" id="opciones-materias" class="custom-select" (change)="mostrar($event.target.value)">
+        <option value="0">Agregar Materia</option>
+        <option value="1">Ver Todas las Materias</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [ngSwitch]="seleccion">
+        <div *ngSwitchCase=0>
+            <div class="form-group my-5 formulario">
+                <label for="nombre">Nombre Materia: </label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombre materia" [(ngModel)]="nombre">
+                <hr />
+                <label for="id">Id: </label>
+                <input type="text" class="form-control" id="id" placeholder="ID" [(ngModel)]="id">
+                <hr />
+                <button class="btn btn-primary btn-block" (click)="agregar()">agregar</button>
+              </div>
+        </div>
+        <div *ngSwitchCase=1 class="my-5">
+          <ul class="list-group">
+            <li class="list-group-item my-1" *ngFor="let materia of materias" [appClase]="materia.id">{{ materia.nombre }} - <span *ngFor="let prog of materia.programas">{{ prog | nombrePrograma }}, </span></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+  

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row my-5">
+      <div class="col-6 offset-3">
+          <h1 class="text-center">Administrar Programas</h1>
+        </div>
+        <div class="col-3">
+          <a routerLink="/inicio"><button class="btn btn-warning my-1">Volver</button></a>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <select name="opciones" id="opciones-programas" class="custom-select" (change)="mostrar($event.target.value)">
+        <option value="0">Agregar Programa</option>
+        <option value="1">Agregar Materias Programa</option>
+        <option value="2">Ver Todos los Programa</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [ngSwitch]="seleccion">
+        <div *ngSwitchCase=0>
+            <div class="form-group my-5 formulario">
+                <label for="nombre">Nombre Programa: </label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombre programa" [(ngModel)]="nombre">
+                <hr />
+                <label for="id">Id: </label>
+                <input type="text" class="form-control" id="id" placeholder="ID" [(ngModel)]="id">
+                <hr />
+                <button class="btn btn-primary btn-block" (click)="agregar()">agregar</button>
+              </div>
+        </div>
+        <div *ngSwitchCase=1>
+          <div class="form-group my-5 formulario">
+              <label for="id-prog">Id Programa: </label>
+              <input type="text" class="form-control" id="id-prog" placeholder="ID programa" [(ngModel)]="id_prog">
+              <hr />
+              <label for="id-mat">Id Materia: </label>
+              <input type="text" class="form-control" id="id-mat" placeholder="ID" [(ngModel)]="id_mat">
+              <hr />
+              <button class="btn btn-primary btn-block" (click)="setMaterias()">agregar</button>
+            </div>
+      </div>
+        <div *ngSwitchCase=2 class="my-5">
+          <ul class="list-group">
+            <li class="list-group-item my-1" *ngFor="let programa of programas">{{ programa.nombre }}</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+  

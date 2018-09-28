@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-6 offset-3">
+      <h1 class="text-center">Administrar Estudiantes</h1>
+    </div>
+    <div class="col-3">
+      <a routerLink="/inicio"><button class="btn btn-warning my-1">Volver</button></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <select name="opciones" id="opciones-estudiantes" class="custom-select" (change)="mostrar($event.target.value)" *ngIf="usuarioLogged.rol === 'staff'">
+        <option value="0">Agregar Estudiante</option>
+        <option value="1">Agregar Materias a Estudiante</option>
+        <option value="2">Agregar Programa a Estudiante</option>
+        <option value="3">Ver Todos los Estudiante</option>
+      </select>
+      <select name="opciones" id="opciones-estudiantes" class="custom-select" (change)="mostrar($event.target.value)" *ngIf="usuarioLogged.rol === 'estudiante'">
+        <option value="4">Matricular Materia</option>
+        <option value="5">Ver Materias Matriculadas</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [ngSwitch]="seleccion">
+        <div *ngSwitchCase=0>
+            <div class="form-group my-5 formulario">
+                <label for="nombre">Nombre: </label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombre" [(ngModel)]="nombre">
+                <hr />
+                <label for="id">Id: </label>
+                <input type="text" class="form-control" id="id" placeholder="ID" [(ngModel)]="id">
+                <hr />
+                <label for="prgorama">Programa: </label>
+                <input type="text" class="form-control" id="programa" placeholder="Programa" [(ngModel)]="programa">
+                <hr />
+                <label for="pass">Contraseña: </label>
+                <input type="password" class="form-control" id="pass" placeholder="Contraseña" [(ngModel)]="cont">
+                <hr />
+                <label for="correo">Correo: </label>
+                <input type="email" class="form-control" id="correo" placeholder="correo@servicio.com" [(ngModel)]="email">
+                <hr />
+                <button class="btn btn-primary btn-block" (click)="agregar()">agregar</button>
+              </div>
+        </div>
+        <div *ngSwitchCase=1>
+            <div class="form-group my-5 formulario">
+              <label for="id-est">Id Estudiante: </label>
+              <input type="text" class="form-control" id="id-est" placeholder="Id estudiante" [(ngModel)]="id_est">
+              <hr />
+              <label for="id-mat">Id Materia: </label>
+              <input type="text" class="form-control" id="id-mat" placeholder="Id materia" [(ngModel)]="id_mat">
+              <hr />
+              <button class="btn btn-primary btn-block" (click)="agregarMateria()">Agregar</button>
+            </div>  
+        </div>
+        <div *ngSwitchCase=2>
+          <div class="form-group my-5 formulario">
+            <label for="id-est">Id Estudiante: </label>
+            <input type="text" class="form-control" id="id-est" placeholder="Id estudiante" [(ngModel)]="id_est">
+            <hr />
+            <label for="prog">Id Programa: </label>
+            <input type="text" class="form-control" id="prog" placeholder="Id materia" [(ngModel)]="id_prog">
+            <hr />
+            <button class="btn btn-primary btn-block" (click)="agregarPrograma()">Agregar</button>
+          </div>  
+        </div>
+        <div *ngSwitchCase=3 class="my-5">
+          <ul class="list-group">
+            <li class="list-group-item my-1" *ngFor="let est of estudiantes">{{ est.nombre }} - {{ est.programa }}</li>
+          </ul>
+        </div>
+        <div *ngSwitchCase=4 class="my-5" >
+          <div class="form-group my-5 formulario">
+            <label for="mat">Materia a matricular: </label>
+            <select name="materias" id="mat" class="custom-select" (change)="enviarMateria($event.target[$event.target.selectedIndex].innerHTML)">
+              <option *ngFor="let materia of materias; let i=index" value="i">{{ materia.nombre }}</option>
+            </select>
+            <button class="btn btn-primary btn-block mt-2" (click)="agregarMateriaEstudiante()">Agregar</button>
+            <hr />
+          </div>
+        </div>
+        <div *ngSwitchCase=5 class="my-5">
+          <ul class="list-group">
+            <li class="list-group-item my-1" *ngFor="let materia of materiasEstudiante" [appClase]="materia.id">{{ materia }}</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

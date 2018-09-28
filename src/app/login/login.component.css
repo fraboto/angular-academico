@@ -1,0 +1,11 @@
+.caja-cont
+{
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 3%;
+}
+
+.container
+{
+    background-image: url("https://images.pexels.com/photos/48126/books-education-school-literature-48126.jpeg");
+    background-size: cover;
+}

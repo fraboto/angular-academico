@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="my-5">
+    <h1 class="offset-1 text-center">
+      Bienvenido a Académico!
+    </h1>
+    <p class="offset-1 text-center">¡Académico, tu plataforma académica por excelencia!</p>
+  </div>
+  <div class="row my-5">
+    <div class="col-6 offset-1" *ngIf="user.rol === 'staff'">
+      <h4 class="text-center">¿Sobre quién desea realizar una acción?</h4>
+      <a routerLink="/staff-profesores"><button class="btn btn-info btn-lg mx-3 mt-5">Profesores</button></a>
+      <a routerLink="/staff-estudiantes"><button class="btn btn-info btn-lg mx-3 mt-5">Estudiantes</button></a>
+      <a routerLink="/staff-staff"><button class="btn btn-info btn-lg mx-3 mt-5">Staff</button></a>
+      <a routerLink="/staff-programas"><button class="btn btn-info btn-lg mx-3 mt-5">Programas</button></a>
+      <a routerLink="/staff-materias"><button class="btn btn-info btn-lg mx-3 mt-5">Materias</button></a>
+    </div>
+    <div class="col-6 offset-1" *ngIf="user.rol === 'profesor'">
+      <a routerLink="/staff-profesores"><button class="btn btn-info btn-lg mx-3 my-5">Ver Materias</button></a>
+    </div>
+    <div class="col-6 offset-1" *ngIf="user.rol === 'estudiante'">
+      <a routerLink="/staff-estudiantes"><button class="btn btn-info btn-lg mx-3 my-5">Matricular Materias</button></a>
+    </div>
+  </div>
+
+  
+</div>

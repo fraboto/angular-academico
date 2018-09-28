@@ -1,0 +1,14 @@
+<div class="container pb-3">
+  <h1 class="row offset-2 my-5">Login - Académico</h1>
+  <div class="col-4 offset-2 p-5 caja-cont mb-5">
+    <div class="form-group">
+      <label for="username">ID de usuario: </label>
+      <input type="text" class="form-control" id="username" placeholder="id o correo" [(ngModel)]="user">
+      <hr />
+      <label for="pass">Contraseña: </label>
+      <input type="password" class="form-control" id="pass" placeholder="contraseña" [(ngModel)]="pass">
+      <hr />
+      <button class="btn btn-primary btn-block" (click)="ingresar()">Ingresar</button>
+    </div>
+  </div>
+</div>

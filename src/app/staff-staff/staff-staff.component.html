@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row my-5">
+      <div class="col-6 offset-3">
+          <h1 class="text-center">Administrar Staffs</h1>
+        </div>
+        <div class="col-3">
+          <a routerLink="/inicio"><button class="btn btn-warning my-1">Volver</button></a>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <select name="opciones" id="opciones-staff" class="custom-select" (change)="mostrar($event.target.value)">
+        <option value="0">Agregar Staff</option>
+        <option value="1">Ver Todos los Staffs</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [ngSwitch]="seleccion" >
+        <div *ngSwitchCase=0>
+            <form class="form-group my-5 formulario" [formGroup]="form_persona" (ngSubmit)="agregar(form_persona.value)">
+                <label for="nombre">Nombre: </label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombre" formControlName="nombre">
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                  <div *ngIf="nombre.errors.required">
+                    El nombre es requerido.
+                  </div>
+                </div>
+                <hr />
+                <label for="id">Id: </label>
+                <input type="text" class="form-control" id="id" placeholder="ID" formControlName="id">
+                <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-danger">
+                  <div *ngIf="id.errors.required">
+                    El id es requerido.
+                  </div>
+                </div>
+                <hr />
+                <label for="cont">Contraseña: </label>
+                <input type="password" class="form-control" id="cont" placeholder="Contraseña" formControlName="cont">
+                <div *ngIf="cont.invalid && (cont.dirty || cont.touched)" class="alert alert-danger">
+                  <div *ngIf="cont.errors.required">
+                    La contraseña es requerida.
+                  </div>
+                  <div *ngIf="cont.errors.minlength">
+                    La contraseña debe tener 6 o más caracteres.
+                  </div>
+                </div>
+                <hr />
+                <label for="email">Correo: </label>
+                <input type="email" class="form-control" id="email" placeholder="correo@servicio.com" formControlName="email">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                  <div *ngIf="email.errors.required">
+                    El correo es requerido.
+                  </div>
+                  <div *ngIf="email.errors.email">
+                    El correo debe tener un formato correcto.
+                  </div>
+                </div>
+                <hr />
+                <input type="submit" class="btn btn-primary btn-block" value="Agregar" [disabled]="!form_persona.valid">
+            </form>
+        </div>
+        <div *ngSwitchCase=1 class="my-5">
+          <ul class="list-group">
+            <li class="list-group-item my-1" *ngFor="let staff of staffs">{{ staff.nombre }}</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
